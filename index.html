@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" ng-app="Learning">
+    <head>
+        <title>Pick a class & learn!</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+        <script src="script.js"></script>
+        <style type="text/css">
+         input { color: darkcyan; font-size: 14pt }
+        </style>
+    </head>
+    <body>
+        <div ng-controller="start">
+            <h1>Learn and grow!</h1>
+
+            <br> Search: <input ng-model="query"  style="width: 20%;" placeholder="Filter by instructor or class" />
+            <br> Limit: <input ng-model="limit" type="number" placeholder="10" />
+            <button ng-click="refresh(limit)">Refresh</button>
+
+            <p style="font-size: 15px"> Click on any row to toggle whether it is a favourite or not.</p>
+
+            <div class="courses" ng-repeat="c in courses | filter: query ">
+                <div style="clear: left; padding: 0.5em; cursor: pointer;" ng-click="toggleFavorite(c)">
+                    <p style="float: left;"><img ng-src="{{c.instructor_image_url}}" height="75" width="75" border="1px"></p>
+                    <div style="padding: 0.4em; font-size: 30px">
+                        <span ng-if="c.favorite"> 💓 </span>
+                        {{ c.instructor_name }}
+                        <p style="font-size: 20px"> {{ c.title }} <p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
